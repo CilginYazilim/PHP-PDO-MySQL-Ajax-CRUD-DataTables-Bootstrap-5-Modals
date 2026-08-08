@@ -12,6 +12,8 @@
 [![DataTables](https://img.shields.io/badge/DataTables-1.13-0f5499?style=flat-square)](https://datatables.net)
 [![License](https://img.shields.io/badge/Lisans-MIT-16a34a?style=flat-square)](LICENSE)
 
+**🇹🇷 Türkçe** &nbsp;·&nbsp; [🇬🇧 English](README.en.md)
+
 [cilginyazilim.com](https://cilginyazilim.com)
 
 </div>
@@ -36,7 +38,7 @@ PHP öğrenirken bulunan CRUD örneklerinin çoğu **SQL injection**, **XSS** ve
 
 ## İçindekiler
 
-- [Ekran Özellikleri](#ekran-özellikleri)
+- [Ekran Görüntüleri](#ekran-görüntüleri)
 - [Neler Var?](#neler-var)
 - [Güvenlik: Neyi, Nasıl Kapattık?](#güvenlik-neyi-nasıl-kapattık)
 - [Kurulum](#kurulum)
@@ -55,24 +57,37 @@ PHP öğrenirken bulunan CRUD örneklerinin çoğu **SQL injection**, **XSS** ve
 
 ---
 
-## Ekran Özellikleri
+## Ekran Görüntüleri
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  ╔══╗  PHP PDO MySQL Ajax CRUD          [Toplam 50 kayıt]  [＋ Yeni] │  ← Gradyanlı marka başlığı
-│  ║CY║  DataTables · Bootstrap 5 · Modal                              │
-├──────────────────────────────────────────────────────────────────────┤
-│  Sayfada [10 ▾] kayıt göster                    Ara: [___________]   │
-│                                                                       │
-│  #    FOTO   AD        SOYAD     KAYIT TARİHİ       İŞLEMLER         │
-│  ─────────────────────────────────────────────────────────────────── │
-│  50   [img]  Ozan      TOPAL     23.02.2025 23:28   [👁] [✎] [🗑]    │  ← Tek sütunda 3 işlem
-│  49   [img]  Beyza     SARI      23.02.2025 10:36   [👁] [✎] [🗑]    │
-│  48   ( H )  Halil     DURMAZ    22.02.2025 18:23   [👁] [✎] [🗑]    │  ← Görsel yoksa baş harf
-│  ...                                                                  │
-│                              [İlk] [Önceki] 1 2 3 [Sonraki] [Son]    │
-└──────────────────────────────────────────────────────────────────────┘
-```
+### Kayıt listesi
+
+Gradyanlı marka başlığı, canlı arama, sıralanabilir sütunlar ve tek sütunda toplanmış işlem butonları. Görseli olmayan kayıtlar için adın baş harfinden otomatik rozet üretilir.
+
+![Kayıt listesi](docs/screenshots/01-liste.png)
+
+### Detay modalı
+
+Göz butonuna basıldığında açılır. Büyük profil görseli, kayıt bilgileri ve düzenlemeye geçiş kısayolu içerir.
+
+![Detay modalı](docs/screenshots/02-detay-modali.png)
+
+### Ekleme / düzenleme formu
+
+Tek bir modal hem ekleme hem düzenleme için kullanılır. Görsel seçildiğinde canlı önizleme gösterilir, hatalar ilgili alanın altında belirir.
+
+![Form modalı](docs/screenshots/03-form-modali.png)
+
+### Sunucu taraflı sayfalama
+
+Sayfalama, arama ve sıralama sunucuda yapılır; tarayıcıya yalnızca görüntülenen sayfa gönderilir.
+
+![Sayfalama](docs/screenshots/04-sayfalama.png)
+
+### Arama
+
+Ad ve soyad üzerinde arama yapılır. `recordsFiltered` doğru hesaplandığı için sayfalama filtreye uyum sağlar.
+
+![Arama](docs/screenshots/05-arama.png)
 
 **Üç modal:**
 
@@ -271,8 +286,13 @@ Kullanıcının işletim sistemi koyu temadaysa **otomatik** devreye girer. Zorl
 .
 ├── index.php                      # Arayüz + tüm JavaScript mantığı
 ├── crud.sql                       # Veritabanı şeması + 50 örnek kayıt
+├── README.md                      # Türkçe belgelendirme
+├── README.en.md                   # İngilizce belgelendirme
 ├── LICENSE                        # MIT lisansı
 ├── .gitignore
+│
+├── docs/
+│   └── screenshots/               # README'de kullanılan ekran görüntüleri
 │
 ├── system/
 │   ├── config.php                 # Ayarlar, oturum, PDO bağlantısı
