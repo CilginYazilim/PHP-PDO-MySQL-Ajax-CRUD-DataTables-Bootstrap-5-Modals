@@ -1,0 +1,63 @@
+/* ==================================================================
+ *  SAYFAYA ÖZEL STİLLER
+ *  cilginyazilim.com – PHP PDO MySQL Ajax CRUD
+ * ------------------------------------------------------------------
+ *  DİKKAT: Genel marka stilleri "cilginyazilim.css" dosyasındadır.
+ *  Bu dosya SADECE bu sayfaya özgü küçük eklemeleri içerir.
+ *  Böylece tasarım kalıbını başka projeye taşırken bu dosyayı
+ *  götürmeniz gerekmez.
+ *
+ *  Yükleme sırası:
+ *    bootstrap.min.css  →  cilginyazilim.css  →  style.css
+ * ================================================================== */
+
+/* Sayfa genişliği: 1200px üstünde tablo çok yayılmasın. */
+.container { max-width: 1180px; }
+
+/* --- Modal içindeki görsel önizleme --------------------------- */
+#image_preview {
+    max-height: 150px;
+    border-radius: var(--cy-radius);
+    object-fit: cover;
+    border: 1px solid var(--cy-border);
+}
+
+/* --- Detay modalındaki büyük profil görseli ------------------- */
+#detail_image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: var(--cy-radius);
+    border: 1px solid var(--cy-border);
+}
+
+/* --- Sürükleyerek yükleme alanı görünümü --------------------- */
+.upload-box {
+    border: 2px dashed var(--cy-border);
+    border-radius: var(--cy-radius);
+    padding: 1rem;
+    transition: border-color .18s ease, background-color .18s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--cy-brand-400);
+    background-color: var(--cy-brand-100);
+}
+
+/* --- Silme onay modalındaki uyarı ikonu ---------------------- */
+.delete-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: rgba(220, 38, 38, .12);
+    color: var(--cy-danger);
+    font-size: 1.8rem;
+}
+
+/* --- Tablo sütun genişlikleri -------------------------------- */
+#user_data th:first-child { width: 70px; }
+#user_data th:nth-child(2) { width: 80px; }
+#user_data th:last-child { width: 140px; }
