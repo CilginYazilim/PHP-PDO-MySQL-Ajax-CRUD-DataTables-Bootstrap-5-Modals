@@ -14,32 +14,92 @@
 
 [🇹🇷 Türkçe](README.md) &nbsp;·&nbsp; **🇬🇧 English**
 
-[cilginyazilim.com](https://cilginyazilim.com)
+[**▶ Live Demo**](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir) &nbsp;·&nbsp; [Source Library](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud) &nbsp;·&nbsp; [cilginyazilim.com](https://cilginyazilim.com)
 
 </div>
 
 ---
 
+<div align="center">
+
+## Live Demo
+
+**No installation, no sign-up, no download — try it in your browser in 3 seconds.**
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir"><img src="https://img.shields.io/badge/OPEN_LIVE_DEMO-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Open Live Demo" height="42"></a>
+&nbsp;
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud"><img src="https://img.shields.io/badge/BROWSE_SOURCE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Browse Source" height="42"></a>
+&nbsp;
+<a href="https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD_ZIP-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="Download ZIP" height="42"></a>
+
+<br><br>
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir" title="Click to open the live demo">
+  <img src="docs/screenshots/01-liste.png" alt="PHP PDO Ajax CRUD live demo preview" width="860">
+</a>
+
+<sub>▲ Click the screenshot to open the demo</sub>
+
+</div>
+
+<br>
+
+### What to try in the first 60 seconds
+
+| # | Try this | What happens behind the scenes |
+|:-:|----------|--------------------------------|
+| **1** | Type `a` into the search box | The **server** filters, not the browser: a `LIKE` query with `%` and `_` escaped, and `recordsFiltered` recomputed |
+| **2** | Click the "Name" column header | The sort column goes through a **whitelist** — a client-supplied column name never reaches the query |
+| **3** | Jump to page 2 | `LIMIT/OFFSET` runs on the server; only that page's 10 rows are sent to the browser |
+| **4** | Press the 👁 **eye** button | `action=fetch` returns **raw JSON**, not HTML; the UI is filled with `.text()` → XSS is impossible |
+| **5** | **New Record** → submit with empty fields | The server returns **HTTP 422** plus a field-keyed `errors` object, rendered under the matching input |
+| **6** | Enter `<script>alert(1)</script>` as a name | Rejected by validation; even if stored, the list escapes every value through `e()` |
+| **7** | Pick an image | Live preview **before** upload; on the server the type is verified from the **file contents** via `getimagesize()` |
+| **8** | Rename a `.php` file to `.png` and upload it | Rejected — content is checked, not the extension, and `upload/.htaccess` disables PHP in that folder |
+| **9** | Hit 🗑 **Delete** and confirm | The row **and** the image on disk go together; the filename is read from the **database**, never from the client |
+| **10** | Switch your OS to dark mode | The UI follows **automatically** — pure CSS, not a single line of JS |
+
+> **Tip:** Keep **F12 → Network** open while you use the demo. You can watch the `action` and `csrf_token` fields going to `ajax.php`, the JSON coming back, and the status codes (200 / 419 / 422) live. It is by far the fastest way to learn this stack.
+
+### About the demo environment
+
+| Topic | Status |
+|-------|--------|
+| **Data** | The **50 sample records** from `crud.sql`. No real personal data. |
+| **Reset** | The demo database is **reset periodically**; records you add are not permanent. |
+| **Authentication** | **None.** That is deliberate — the example focuses on CRUD and the security layer. Always add a login system in your own project (see [Going to Production](#going-to-production)). |
+| **Upload limit** | **2 MB** per image; `jpg`, `png`, `gif`, `webp` only. |
+| **`APP_DEBUG`** | **`false`** in the demo, exactly as it should be in production. Error details go to the log, not the screen. |
+| **Dependencies** | **Zero.** No Composer, no npm, no CDN. The demo runs identically on an offline server. |
+
+> If the demo is temporarily down, no problem: cloning the repo and importing `crud.sql` gets you the same screen locally in **two minutes** → [Installation](#installation)
+
+---
+
 ## What Is This?
 
-Most PHP CRUD tutorials you will find online contain **SQL injection**, **XSS** and **file upload vulnerabilities**. This project exists to show what the same job looks like when it is done **correctly and securely**.
+Search "PHP CRUD example" and most results share the same three mistakes: queries built by concatenating `$_POST`, output printed without escaping, uploads trusted by their extension. A beginner copies that code — and learns the mistake along with it.
 
-Its distinguishing feature: **every line of code is commented.** You will find out why something is written a certain way, and what would break if it were written the common (wrong) way. Even someone new to PHP can read through the files and understand what each piece does.
+This project exists to break that cycle: it's **the same CRUD, at the same level of simplicity, but actually written securely**. The difference isn't the line count, it's *why* each line is written the way it is. Why `getimagesize()` beats `explode('.', $name)`, what `EMULATE_PREPARES = false` actually changes, why a CSRF token is worthless without `hash_equals()` — all of it is explained right where it happens, inline in the comments. No separate book to read; just open the file.
 
 > **Note:** The inline code comments are written in **Turkish**, since that is the primary audience of this teaching example. The code itself, variable names and this documentation are in English. Pull requests adding English comment translations are welcome.
 
 **Who is this for?**
 
-- Anyone learning the PHP + AJAX + DataTables combination
+- Anyone learning the PHP + AJAX + DataTables combination **the right way**
 - Anyone who needs a ready, secure CRUD skeleton for their own project
 - Anyone looking for a reusable design system built on top of Bootstrap 5
+- Anyone curious how mobile-friendly, accessible, and dependency-free a CRUD can actually be
 
-> **Clone it, import `crud.sql`, run it.** There are no other setup steps. No Composer, no npm, not even an internet connection — every library ships inside the project.
+> **Clone it, import `crud.sql`, run it.** There are no other setup steps. No Composer, no npm, not even an internet connection — every library ships inside the project. Want to try it with zero setup first? See [Live Demo](#live-demo).
+
+This project is part of the **[Çılgın Yazılım Library](https://cilginyazilim.com/kutuphane)** — a collection of commented, production-ready examples built on the same design system. Check it out for more.
 
 ---
 
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [Screenshots](#screenshots)
 - [Features](#features)
 - [Security: What Was Fixed, and How](#security-what-was-fixed-and-how)
@@ -113,7 +173,7 @@ Searches across first name and last name. Because `recordsFiltered` is calculate
 - Live image preview (before uploading)
 - Initial badge for records without an image
 - **Automatic dark mode** (follows the OS setting)
-- Responsive and accessible (ARIA labelled)
+- **Tuned specifically for mobile** — ≥40px touch targets, table never forces horizontal scrolling, accessible (ARIA labelled)
 - Fully localised in Turkish — no CDN, works offline
 
 </td><td width="50%" valign="top">
@@ -153,6 +213,8 @@ The vulnerabilities found in most similar examples, and how this project prevent
 ---
 
 ## Installation
+
+> Just want to see it? No installation needed → [**open the Live Demo**](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir). The steps below are for running it on your own machine (~2 minutes).
 
 ### Requirements
 
@@ -652,6 +714,12 @@ git push origin feature/my-feature
 [MIT](LICENSE) — free for any use, including commercial.
 
 <div align="center">
+
+### Try it first
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir"><img src="https://img.shields.io/badge/OPEN_LIVE_DEMO-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Open Live Demo" height="42"></a>
+&nbsp;
+<a href="https://cilginyazilim.com/kutuphane"><img src="https://img.shields.io/badge/MORE_EXAMPLES-061321?style=for-the-badge&logo=bookstack&logoColor=white&labelColor=061321" alt="More Examples" height="42"></a>
 
 Built with ❤ by **[cilginyazilim.com](https://cilginyazilim.com)**
 

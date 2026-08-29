@@ -608,9 +608,87 @@ a.cy-brand:hover { color: inherit; opacity: .88; }
     .cy-card__body { padding: 1rem; }
 
     .cy-brand__title { font-size: 1.05rem; }
-    .cy-avatar { width: 38px; height: 38px; }
+    .cy-brand__subtitle { font-size: .78rem; }
     .cy-detail { grid-template-columns: 1fr; gap: .2rem .5rem; }
     .cy-detail dd { margin-bottom: .5rem; }
+
+    /* --- Başlık kontrolleri: rozet / GitHub / Yeni Kayıt --------
+     * Masaüstünde tek satırda yan yana dururlar. Küçük ekranda tek
+     * sütuna geçer, "Yeni Kayıt" tam genişlik olur (en sık dokunulan
+     * buton, parmakla kolay basılabilsin diye). */
+    .cy-header-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .cy-header-controls #add_button {
+        flex: 1 1 100%;
+        justify-content: center;
+        min-height: 44px; /* dokunma hedefi: en az 44px */
+    }
+    .cy-header-controls a.cy-btn--glass {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+    .cy-header-controls .cy-badge { flex: 1 1 auto; text-align: center; }
+
+    /* --- Tablo: "Kayıt Tarihi" sütununu sakla ------------------
+     * Küçük ekranda yatay kaydırmaya zorlamak yerine bu sütunu
+     * gizliyoruz; tarih zaten 👁 Detay modalında görünür. */
+    #user_data th:nth-child(5),
+    #user_data td:nth-child(5) { display: none; }
+
+    .cy-table > thead > tr > th,
+    .cy-table > tbody > tr > td {
+        padding: .55rem .5rem;
+        font-size: .82rem;
+    }
+
+    .cy-avatar { width: 34px; height: 34px; }
+
+    /* İşlem butonları: dokunma hedefi büyütülüp aralık daraltıldı */
+    .cy-btn-icon { width: 38px; height: 38px; }
+    .cy-actions { gap: .3rem; }
+
+    /* --- DataTables arama / uzunluk / sayfalama -----------------
+     * Bootstrap grid'i bunları zaten alt alta diziyor; burada sadece
+     * boşluk ve hizalamayı mobile göre inceltiyoruz. */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter { margin-bottom: .75rem; }
+
+    .dataTables_wrapper .dataTables_filter label,
+    .dataTables_wrapper .dataTables_length label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .3rem;
+        width: 100%;
+    }
+
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_length select {
+        width: 100%;
+        min-height: 40px; /* dokunma hedefi */
+    }
+
+    .dataTables_wrapper .dataTables_info { text-align: center; }
+    .dataTables_wrapper .dataTables_paginate { text-align: center; margin-top: .5rem; }
+    .dataTables_wrapper .dataTables_paginate .pagination { justify-content: center; }
+    .dataTables_wrapper .page-link { min-width: 38px; min-height: 38px; }
+
+    .cy-card__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .35rem;
+        font-size: .8rem;
+    }
+}
+
+/* --- Çok küçük ekranlar (dar telefonlar) ------------------------- */
+@media (max-width: 400px) {
+    .cy-avatar { width: 30px; height: 30px; }
+    .cy-brand__subtitle { display: none; } /* alt başlık yer kaplamasın */
+    .cy-header-controls__label { display: none; } /* GitHub butonu ikon-only */
+    .cy-header-controls a.cy-btn--glass { flex: 0 0 auto; padding-left: .7rem; padding-right: .7rem; }
 }
 
 

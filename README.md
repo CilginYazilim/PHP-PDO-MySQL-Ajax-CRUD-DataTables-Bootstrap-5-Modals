@@ -14,30 +14,90 @@
 
 **🇹🇷 Türkçe** &nbsp;·&nbsp; [🇬🇧 English](README.en.md)
 
-[cilginyazilim.com](https://cilginyazilim.com)
+[**▶ Canlı Demo**](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir) &nbsp;·&nbsp; [Kaynak Kütüphanesi](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud) &nbsp;·&nbsp; [cilginyazilim.com](https://cilginyazilim.com)
 
 </div>
 
 ---
 
+<div align="center">
+
+## Canlı Demo
+
+**Kurulum yok, kayıt yok, indirme yok — tarayıcınızdan 3 saniyede deneyin.**
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir"><img src="https://img.shields.io/badge/CANLI_DEMOYU_A%C3%87-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Canlı Demoyu Aç" height="42"></a>
+&nbsp;
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud"><img src="https://img.shields.io/badge/KAYNAK_KODU_%C4%B0NCELE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Kaynak Kodu İncele" height="42"></a>
+&nbsp;
+<a href="https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/ZIP_%C4%B0ND%C4%B0R-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="ZIP İndir" height="42"></a>
+
+<br><br>
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir" title="Canlı demoyu açmak için tıklayın">
+  <img src="docs/screenshots/01-liste.png" alt="PHP PDO Ajax CRUD canlı demo önizlemesi" width="860">
+</a>
+
+<sub>▲ Görsele tıklayarak demoyu açabilirsiniz</sub>
+
+</div>
+
+<br>
+
+### Demoda 60 saniyede neleri deneyebilirsiniz?
+
+| # | Şunu deneyin | Perde arkasında ne oluyor? |
+|:-:|--------------|----------------------------|
+| **1** | Arama kutusuna `a` yazın | Tarayıcı değil **sunucu** filtreliyor: `LIKE` sorgusu, `%` ve `_` kaçışlanmış, `recordsFiltered` yeniden hesaplanıyor |
+| **2** | "Ad" sütun başlığına tıklayın | Sıralama sütunu **beyaz listeden** geçiyor — istemciden gelen sütun adı sorguya asla girmiyor |
+| **3** | 2. sayfaya geçin | `LIMIT/OFFSET` sunucuda; tarayıcıya sadece o sayfanın 10 satırı iniyor |
+| **4** | 👁 **Göz** butonuna basın | `action=fetch` **ham JSON** dönüyor, HTML değil; ekran `.text()` ile dolduruluyor → XSS imkânsız |
+| **5** | **Yeni Kayıt** → alanları boş bırakıp gönderin | Sunucu **HTTP 422** + alan bazlı `errors` nesnesi dönüyor, mesaj ilgili inputun altına düşüyor |
+| **6** | Ad alanına `<script>alert(1)</script>` yazın | Kayıt reddediliyor; kaydedilse bile listeye `e()` ile kaçışlanmış çıkardı |
+| **7** | Bir görsel seçin | Yüklemeden **önce** canlı önizleme; sunucuda tür `getimagesize()` ile **dosya içeriğinden** doğrulanıyor |
+| **8** | `.php` uzantılı bir dosyayı `.png` yapıp yükleyin | Reddediliyor — uzantıya değil içeriğe bakılıyor, ayrıca `upload/.htaccess` o klasörde PHP'yi kapatıyor |
+| **9** | 🗑 **Sil** deyip onaylayın | Kayıt **ve** diskteki görsel birlikte siliniyor; dosya adı istemciden değil **veritabanından** okunuyor |
+| **10** | İşletim sisteminizi koyu temaya alın | Arayüz **otomatik** koyu temaya geçiyor — tek satır JS yok, saf CSS |
+
+> **İpucu:** Demoyu açıkken **F12 → Network** sekmesini açın. Her istekte `ajax.php`'ye giden `action` ve `csrf_token` alanlarını, dönen JSON'u ve HTTP durum kodlarını (200 / 419 / 422) canlı görebilirsiniz. Öğrenmenin en hızlı yolu budur.
+
+### Demo alanı hakkında bilinmesi gerekenler
+
+| Konu | Durum |
+|------|-------|
+| **Veriler** | `crud.sql` içindeki **50 örnek kayıt**. Gerçek kişi verisi yoktur. |
+| **Sıfırlama** | Demo veritabanı **düzenli aralıklarla** başlangıç haline döner; eklediğiniz kayıtlar kalıcı değildir. |
+| **Kimlik doğrulama** | **Yoktur.** Bu bilinçli bir tercihtir — örnek, CRUD ve güvenlik katmanına odaklanır. Kendi projenizde mutlaka giriş sistemi ekleyin (bkz. [Canlı Ortama Alırken](#canlı-ortama-alırken)). |
+| **Yükleme sınırı** | Görsel başına **2 MB**; yalnızca `jpg`, `png`, `gif`, `webp`. |
+| **`APP_DEBUG`** | Demoda **`false`** — canlı ortamda olması gerektiği gibi. Hata detayları ekranda değil log'da. |
+| **Bağımlılık** | **Sıfır.** Composer yok, npm yok, CDN yok. Demo internetsiz bir sunucuda da aynı çalışır. |
+
+> Demo geçici olarak kapalıysa endişelenmeyin: depoyu klonlayıp `crud.sql`'i içe aktarmanız aynı ekranı kendi bilgisayarınızda **2 dakikada** ayağa kaldırır → [Kurulum](#kurulum)
+
+---
+
 ## Bu Proje Nedir?
 
-PHP öğrenirken bulunan CRUD örneklerinin çoğu **SQL injection**, **XSS** ve **dosya yükleme açıkları** içerir. Bu proje, aynı işi **doğru ve güvenli** yapmanın nasıl göründüğünü göstermek için hazırlandı.
+"PHP CRUD örneği" diye aratınca çıkan sonuçların çoğu aynı üç hataya sahiptir: sorgular `$_POST` ile birleştirilir, ekrana basılan veri kaçışlanmaz, dosya yükleme uzantıya güvenir. Yeni başlayan biri bu kodu kopyalayıp öğrenir — ve yanlışı da öğrenmiş olur.
 
-Öne çıkan yanı: **kodun her satırı açıklamalı.** Bir şeyin neden öyle yazıldığını, yanlış yazılsa ne olacağını yorum satırlarında bulacaksınız. PHP'ye yeni başlayan biri bile dosyaları okuyarak neyin ne işe yaradığını kavrayabilir.
+Bu proje o kısır döngüyü kırmak için var: **aynı CRUD'u, aynı sadelikte, ama gerçekten güvenli yazılmış haliyle** gösteriyor. Fark satır sayısında değil, satırların *neden* öyle yazıldığında. `getimagesize()` neden `explode('.', $name)`'den daha güvenli, `EMULATE_PREPARES = false` ne değiştiriyor, `hash_equals()` olmadan CSRF token'ı neden kırılabilir — bunların hepsi kod içindeki yorumlarda, olduğu yerde anlatılıyor. Ayrı bir kitap okumanız gerekmiyor; dosyayı açıp okumanız yeterli.
 
 **Kimler için uygun?**
 
-- PHP + AJAX + DataTables üçlüsünü öğrenmek isteyenler
+- PHP + AJAX + DataTables üçlüsünü **doğru** öğrenmek isteyenler
 - Kendi projesine hazır ve güvenli bir CRUD iskeleti arayanlar
 - Bootstrap 5 üzerine kurulu, tekrar kullanılabilir bir tasarım kalıbı arayanlar
+- Bir CRUD'un ne kadar mobil dostu, erişilebilir ve bağımlılıksız olabileceğini merak edenler
 
-> **Klonla, `crud.sql`'i içe aktar, çalıştır.** Başka hiçbir kurulum adımı yok. Composer yok, npm yok, internet bağlantısı bile gerekmiyor — tüm kütüphaneler proje içinde.
+> **Klonla, `crud.sql`'i içe aktar, çalıştır.** Başka hiçbir kurulum adımı yok. Composer yok, npm yok, internet bağlantısı bile gerekmiyor — tüm kütüphaneler proje içinde. Hiç kurulum yapmadan denemek isterseniz [Canlı Demo](#canlı-demo) bölümüne göz atın.
+
+Bu proje, **[Çılgın Yazılım Kütüphanesi](https://cilginyazilim.com/kutuphane)** altında yayınlanan açıklamalı, üretime hazır örneklerden biridir — aynı tasarım kalıbıyla hazırlanmış diğer örnekleri de orada bulabilirsiniz.
 
 ---
 
 ## İçindekiler
 
+- [Canlı Demo](#canlı-demo)
 - [Ekran Görüntüleri](#ekran-görüntüleri)
 - [Neler Var?](#neler-var)
 - [Güvenlik: Neyi, Nasıl Kapattık?](#güvenlik-neyi-nasıl-kapattık)
@@ -111,7 +171,7 @@ Ad ve soyad üzerinde arama yapılır. `recordsFiltered` doğru hesaplandığı 
 - Görsel canlı önizleme (yüklemeden önce)
 - Görselsiz kayıtlar için baş harf rozeti
 - **Otomatik koyu tema** (işletim sistemi ayarını izler)
-- Mobil uyumlu, erişilebilir (ARIA etiketli)
+- **Mobil için ayrıca inceltilmiş** — dokunma hedefleri ≥40px, tablo yatay kaydırmaya zorlamaz, erişilebilir (ARIA etiketli)
 - Tamamı Türkçe — CDN'siz, çevrimdışı çalışır
 
 </td><td width="50%" valign="top">
@@ -151,6 +211,8 @@ Ad ve soyad üzerinde arama yapılır. `recordsFiltered` doğru hesaplandığı 
 ---
 
 ## Kurulum
+
+> Sadece görmek istiyorsanız kurulum gerekmez → [**Canlı Demoyu açın**](https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir). Aşağıdaki adımlar, projeyi kendi bilgisayarınızda çalıştırmak içindir (~2 dakika).
 
 ### Gereksinimler
 
@@ -639,6 +701,12 @@ git push origin ozellik/yeni-ozellik
 [MIT](LICENSE) — ticari kullanım dahil serbesttir.
 
 <div align="center">
+
+### Önce bir deneyin
+
+<a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud/calistir"><img src="https://img.shields.io/badge/CANLI_DEMOYU_A%C3%87-0b5cb5?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=061321" alt="Canlı Demoyu Aç" height="42"></a>
+&nbsp;
+<a href="https://cilginyazilim.com/kutuphane"><img src="https://img.shields.io/badge/D%C4%B0%C4%9EER_%C3%96RNEKLER-061321?style=for-the-badge&logo=bookstack&logoColor=white&labelColor=061321" alt="Diğer Örnekler" height="42"></a>
 
 **[cilginyazilim.com](https://cilginyazilim.com)** tarafından ❤ ile geliştirildi
 
