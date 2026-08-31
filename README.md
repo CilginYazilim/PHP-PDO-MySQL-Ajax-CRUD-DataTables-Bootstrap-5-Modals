@@ -47,7 +47,7 @@
 ### Demoda 60 saniyede neleri deneyebilirsiniz?
 
 | # | Şunu deneyin | Perde arkasında ne oluyor? |
-|:-:|--------------|----------------------------|
+|---|--------------|----------------------------|
 | **1** | Arama kutusuna `a` yazın | Tarayıcı değil **sunucu** filtreliyor: `LIKE` sorgusu, `%` ve `_` kaçışlanmış, `recordsFiltered` yeniden hesaplanıyor |
 | **2** | "Ad" sütun başlığına tıklayın | Sıralama sütunu **beyaz listeden** geçiyor — istemciden gelen sütun adı sorguya asla girmiyor |
 | **3** | 2. sayfaya geçin | `LIMIT/OFFSET` sunucuda; tarayıcıya sadece o sayfanın 10 satırı iniyor |

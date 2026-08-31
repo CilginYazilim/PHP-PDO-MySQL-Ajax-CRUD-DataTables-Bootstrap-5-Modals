@@ -47,7 +47,7 @@
 ### What to try in the first 60 seconds
 
 | # | Try this | What happens behind the scenes |
-|:-:|----------|--------------------------------|
+|---|----------|--------------------------------|
 | **1** | Type `a` into the search box | The **server** filters, not the browser: a `LIKE` query with `%` and `_` escaped, and `recordsFiltered` recomputed |
 | **2** | Click the "Name" column header | The sort column goes through a **whitelist** — a client-supplied column name never reaches the query |
 | **3** | Jump to page 2 | `LIMIT/OFFSET` runs on the server; only that page's 10 rows are sent to the browser |
