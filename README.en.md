@@ -239,6 +239,12 @@ cd php-pdo-ajax-crud
 mysql -u root -p < crud.sql
 ```
 
+> **Optional — your own database credentials:** run
+> `cp .env.example .env` (Windows: `copy .env.example .env`) and fill in the
+> `DB_*` lines. It runs without the file too; the defaults match a local XAMPP
+> install (`root`, empty password). `.env` is in `.gitignore`, so your password
+> never reaches the repository.
+
 Using phpMyAdmin: **Import → Choose file → `crud.sql` → Go**
 
 **3 — Run it**
@@ -388,6 +394,7 @@ Activates **automatically** when the visitor's operating system is set to dark m
 ```
 .
 ├── index.php                      # Interface + all JavaScript logic
+├── .env.example                   # Database credentials (optional) — in .gitignore
 ├── crud.sql                       # Database schema + 50 sample records
 ├── README.md                      # Turkish documentation
 ├── README.en.md                   # English documentation

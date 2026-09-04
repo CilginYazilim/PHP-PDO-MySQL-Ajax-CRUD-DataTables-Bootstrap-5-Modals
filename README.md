@@ -237,6 +237,12 @@ cd php-pdo-ajax-crud
 mysql -u root -p < crud.sql
 ```
 
+> **İsteğe bağlı — kendi veritabanı bilgileriniz:**
+> `cp .env.example .env` (Windows: `copy .env.example .env`) deyip `DB_*`
+> satırlarını doldurun. Bu dosya olmadan da çalışır; varsayılanlar yerel bir
+> XAMPP kurulumuna (`root`, boş parola) göredir. `.env` `.gitignore`
+> içindedir — parolanız depoya gitmez.
+
 phpMyAdmin ile: **İçe Aktar → Dosya seç → `crud.sql` → Başlat**
 
 **3 — Çalıştırın**
@@ -385,6 +391,7 @@ Kullanıcının işletim sistemi koyu temadaysa **otomatik** devreye girer. Zorl
 ```
 .
 ├── index.php                      # Arayüz + tüm JavaScript mantığı
+├── .env.example                   # Veritabanı bilgileri (isteğe bağlı) — .gitignore içinde
 ├── crud.sql                       # Veritabanı şeması + 50 örnek kayıt
 ├── README.md                      # Türkçe belgelendirme
 ├── README.en.md                   # İngilizce belgelendirme
