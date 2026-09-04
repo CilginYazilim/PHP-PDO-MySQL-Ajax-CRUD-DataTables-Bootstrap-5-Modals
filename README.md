@@ -30,7 +30,7 @@
 &nbsp;
 <a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud"><img src="https://img.shields.io/badge/KAYNAK_KODU_%C4%B0NCELE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Kaynak Kodu İncele" height="42"></a>
 &nbsp;
-<a href="https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/ZIP_%C4%B0ND%C4%B0R-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="ZIP İndir" height="42"></a>
+<a href="https://github.com/CilginYazilim/php-pdo-ajax-crud/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/ZIP_%C4%B0ND%C4%B0R-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="ZIP İndir" height="42"></a>
 
 <br><br>
 
@@ -225,8 +225,8 @@ Ad ve soyad üzerinde arama yapılır. `recordsFiltered` doğru hesaplandığı 
 **1 — Projeyi indirin**
 
 ```bash
-git clone https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals.git
-cd PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals
+git clone https://github.com/CilginYazilim/php-pdo-ajax-crud.git
+cd php-pdo-ajax-crud
 ```
 
 **2 — Veritabanını oluşturun**
@@ -246,13 +246,51 @@ php -S 127.0.0.1:8000
 ```
 
 XAMPP kullanıyorsanız projeyi `htdocs` altına koymanız ve şu adresi açmanız yeterli:
-`http://localhost/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/`
+`http://localhost/php-pdo-ajax-crud/`
 
 **4 — Tarayıcıda açın** → `http://127.0.0.1:8000/`
 
 Karşınıza **50 örnek kayıt** dolu, çalışır durumda bir tablo gelecek.
 
 > **Linux/macOS kullanıcıları:** `upload/` klasörüne yazma izni gerekir → `chmod 755 upload`
+
+### Ortam değişkenleri
+
+Depo kökündeki **`.env`** dosyasına yazın; `system/config.php` dosyasına
+hiç dokunmayın:
+
+```bash
+cp .env.example .env        # Windows: copy .env.example .env
+```
+
+`.env` `.gitignore` içindedir: depoya gönderilmez ve dağıtım (deploy) onu
+**silmez**. `system/config.php` ise depoda durur ve her dağıtımda depodaki
+sürümle değiştirilir — parolayı oraya yazarsanız hem GitHub'a gider hem de
+ilk deploy'da kaybolur.
+
+Dosyayı hiç oluşturmasanız da uygulama çalışır; aşağıdaki varsayılanlar
+yerel bir XAMPP kurulumuna göredir.
+
+**Değer arama sırası:** `.env` → sunucunun gerçek ortam değişkeni
+(Apache `SetEnv`, systemd…) → buradaki varsayılan.
+
+| Değişken | Varsayılan | Ne işe yarar |
+|---|---|---|
+| `DB_HOST` | `127.0.0.1` | Veritabanı sunucusu |
+| `DB_NAME` | `crud` | Veritabanı adı |
+| `DB_USER` | `root` | Kullanıcı |
+| `DB_PASS` | *(boş)* | Şifre — **koda yazmayın** |
+| `APP_TIMEZONE` | `Europe/Istanbul` | PHP'nin saat dilimi |
+| `APP_DEBUG` | *ortamdan* | Hataların ekrana basılıp basılmayacağı |
+
+**`APP_TIMEZONE` neden var?** XAMPP'ın `php.ini` dosyasındaki
+`date.timezone`, MySQL'in kullandığı sistem diliminden farklı olabilir.
+Test makinesinde PHP `Europe/Berlin`, MySQL `Europe/Istanbul`
+kullanıyordu; aynı anı anlatan iki satır bir saat farklı görünüyordu.
+Zaman **hesapları** SQL tarafında yapıldığı için doğruydu, ama ekrana
+basılan saat kayıyordu. Artık dilim açıkça sabitleniyor — sunucunuz başka
+bir bölgedeyse bu değişkeni tanımlamanız yeterli, koda dokunmayın.
+
 
 ---
 
@@ -657,21 +695,21 @@ Evet, `assets/` altındaki dosyaları değiştirmeniz yeterli. Tasarım kalıbı
 
 **Bu proje herkese açıktır — dilediğiniz geliştirmeyle katkı sağlayabilirsiniz.**
 
-📦 **Depo:** [github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals)
+📦 **Depo:** [github.com/CilginYazilim/php-pdo-ajax-crud](https://github.com/CilginYazilim/php-pdo-ajax-crud)
 
 | Nasıl katkı sağlarım? | Nereden |
 |----------------------|---------|
-| 🐛 Hata bildir | [Issues](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/issues) |
-| 💡 Özellik öner | [Issues](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/issues) |
-| 🔧 Kod gönder | [Pull Requests](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/pulls) |
-| ❓ Soru sor | [Discussions](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/discussions) |
+| 🐛 Hata bildir | [Issues](https://github.com/CilginYazilim/php-pdo-ajax-crud/issues) |
+| 💡 Özellik öner | [Issues](https://github.com/CilginYazilim/php-pdo-ajax-crud/issues) |
+| 🔧 Kod gönder | [Pull Requests](https://github.com/CilginYazilim/php-pdo-ajax-crud/pulls) |
+| ❓ Soru sor | [Discussions](https://github.com/CilginYazilim/php-pdo-ajax-crud/discussions) |
 
 ### Pull request adımları
 
 ```bash
 # 1) Depoyu çatallayın (GitHub'da "Fork" butonu), sonra kendi kopyanızı indirin
-git clone https://github.com/KULLANICI-ADINIZ/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals.git
-cd PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals
+git clone https://github.com/KULLANICI-ADINIZ/php-pdo-ajax-crud.git
+cd php-pdo-ajax-crud
 
 # 2) Değişikliğiniz için yeni bir dal açın
 git checkout -b ozellik/yeni-ozellik

@@ -30,7 +30,7 @@
 &nbsp;
 <a href="https://cilginyazilim.com/kutuphane/php-pdo-ajax-crud"><img src="https://img.shields.io/badge/BROWSE_SOURCE-0ea5e9?style=for-the-badge&logo=readthedocs&logoColor=white&labelColor=061321" alt="Browse Source" height="42"></a>
 &nbsp;
-<a href="https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD_ZIP-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="Download ZIP" height="42"></a>
+<a href="https://github.com/CilginYazilim/php-pdo-ajax-crud/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD_ZIP-16a34a?style=for-the-badge&logo=github&logoColor=white&labelColor=061321" alt="Download ZIP" height="42"></a>
 
 <br><br>
 
@@ -227,8 +227,8 @@ The vulnerabilities found in most similar examples, and how this project prevent
 **1 — Download the project**
 
 ```bash
-git clone https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals.git
-cd PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals
+git clone https://github.com/CilginYazilim/php-pdo-ajax-crud.git
+cd php-pdo-ajax-crud
 ```
 
 **2 — Create the database**
@@ -248,13 +248,52 @@ php -S 127.0.0.1:8000
 ```
 
 If you use XAMPP, drop the project into `htdocs` and open:
-`http://localhost/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/`
+`http://localhost/php-pdo-ajax-crud/`
 
 **4 — Open it in a browser** → `http://127.0.0.1:8000/`
 
 You will be greeted by a working table populated with **50 sample records**.
 
 > **Linux/macOS users:** the `upload/` folder needs write permission → `chmod 755 upload`
+
+### Environment variables
+
+Put them in a **`.env`** file at the repository root and never touch
+`system/config.php`:
+
+```bash
+cp .env.example .env        # Windows: copy .env.example .env
+```
+
+`.env` is in `.gitignore`: it never reaches the repository and a deploy
+does **not** delete it. `system/config.php`, by contrast, lives in the
+repository and is replaced by the repository's copy on every deploy — a
+password written there both ships to GitHub and disappears on the first
+deploy.
+
+The app runs without the file too; the defaults below match a local XAMPP
+install.
+
+**Lookup order:** `.env` → the real environment variable (Apache `SetEnv`,
+systemd…) → the default shown here.
+
+| Variable | Default | What it does |
+|---|---|---|
+| `DB_HOST` | `127.0.0.1` | Database server |
+| `DB_NAME` | `crud` | Database name |
+| `DB_USER` | `root` | User |
+| `DB_PASS` | *(empty)* | Password — **never hard-code it** |
+| `APP_TIMEZONE` | `Europe/Istanbul` | PHP timezone |
+| `APP_DEBUG` | *from environment* | Whether errors are printed to the page |
+
+**Why `APP_TIMEZONE`?** The `date.timezone` in XAMPP's `php.ini` can
+differ from the system timezone MySQL uses. On the test machine PHP was
+`Europe/Berlin` while MySQL was `Europe/Istanbul`, so two lines describing
+the same instant were an hour apart. The time **arithmetic** is done in
+SQL and was always correct — what drifted was the clock PHP printed. The
+timezone is now pinned explicitly; if your server is in another region,
+set this variable instead of touching the code.
+
 
 ---
 
@@ -670,21 +709,21 @@ Absolutely. The interface strings live in two places: the HTML in `index.php` an
 
 **This project is open to everyone — contributions of any kind are welcome.**
 
-📦 **Repository:** [github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals)
+📦 **Repository:** [github.com/CilginYazilim/php-pdo-ajax-crud](https://github.com/CilginYazilim/php-pdo-ajax-crud)
 
 | How to contribute | Where |
 |-------------------|-------|
-| 🐛 Report a bug | [Issues](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/issues) |
-| 💡 Suggest a feature | [Issues](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/issues) |
-| 🔧 Submit code | [Pull Requests](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/pulls) |
-| ❓ Ask a question | [Discussions](https://github.com/CilginYazilim/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals/discussions) |
+| 🐛 Report a bug | [Issues](https://github.com/CilginYazilim/php-pdo-ajax-crud/issues) |
+| 💡 Suggest a feature | [Issues](https://github.com/CilginYazilim/php-pdo-ajax-crud/issues) |
+| 🔧 Submit code | [Pull Requests](https://github.com/CilginYazilim/php-pdo-ajax-crud/pulls) |
+| ❓ Ask a question | [Discussions](https://github.com/CilginYazilim/php-pdo-ajax-crud/discussions) |
 
 ### Pull request steps
 
 ```bash
 # 1) Fork the repo on GitHub, then clone your copy
-git clone https://github.com/YOUR-USERNAME/PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals.git
-cd PHP-PDO-MySQL-Ajax-CRUD-DataTables-Bootstrap-5-Modals
+git clone https://github.com/YOUR-USERNAME/php-pdo-ajax-crud.git
+cd php-pdo-ajax-crud
 
 # 2) Create a branch for your change
 git checkout -b feature/my-feature
